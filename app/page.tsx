@@ -12,8 +12,8 @@ type DbProduct = {
   id: string
   name: string
   price: number
-  image: string
-  hover_image: string
+  image_url: string
+  hover_image_url: string
   sizes: number[]
 }
 
@@ -27,8 +27,8 @@ function mapDbProductToProduct(row: DbProduct): Product {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }),
-    image: row.image,
-    hoverImage: row.hover_image,
+    image: row.image_url,
+    hoverImage: row.hover_image_url,
     sizes: row.sizes.map(Number),
   }
 }
