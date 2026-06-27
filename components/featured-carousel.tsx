@@ -4,42 +4,11 @@ import { useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ProductCard, type Product } from "@/components/product-card"
 
-const products: Product[] = [
-  {
-    id: "1",
-    name: "Sneaker Branco Atlas",
-    price: "R$ 389",
-    image: "/product-1.png",
-    hoverImage: "/product-1-worn.png",
-    sizes: [37, 38, 39, 40, 41, 42],
-  },
-  {
-    id: "2",
-    name: "Mocassim Caramelo Vale",
-    price: "R$ 429",
-    image: "/product-2.png",
-    hoverImage: "/product-2-worn.png",
-    sizes: [38, 39, 40, 41, 42, 43],
-  },
-  {
-    id: "3",
-    name: "Sneaker Preto Pulso",
-    price: "R$ 459",
-    image: "/product-3.png",
-    hoverImage: "/product-3-worn.png",
-    sizes: [38, 39, 40, 41, 42],
-  },
-  {
-    id: "4",
-    name: "Casual Camurça Duna",
-    price: "R$ 399",
-    image: "/product-4.png",
-    hoverImage: "/product-4-worn.png",
-    sizes: [37, 38, 39, 40, 41],
-  },
-]
+type FeaturedCarouselProps = {
+  products: Product[]
+}
 
-export function FeaturedCarousel() {
+export function FeaturedCarousel({ products }: FeaturedCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const scroll = (direction: "left" | "right") => {
