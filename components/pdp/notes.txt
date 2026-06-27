@@ -1,0 +1,124 @@
+"use client"
+
+
+
+import Image from "next/image"
+
+import Link from "next/link"
+
+import {
+
+  Sheet,
+
+  SheetContent,
+
+  SheetHeader,
+
+  SheetTitle,
+
+  SheetTrigger,
+
+} from "@/components/ui/sheet"
+
+
+
+type CartDrawerProps = {
+
+  children: React.ReactNode
+
+}
+
+
+
+export function CartDrawer({ children }: CartDrawerProps) {
+
+  return (
+
+    <Sheet>
+
+      <SheetTrigger asChild>{children}</SheetTrigger>
+
+      <SheetContent side="right" className="flex w-full flex-col sm:max-w-md">
+
+        <SheetHeader className="border-b border-border pb-4">
+
+          <SheetTitle className="font-serif text-xl font-bold text-foreground">Seu Carrinho</SheetTitle>
+
+        </SheetHeader>
+
+
+
+        <div className="flex flex-1 flex-col gap-4 overflow-y-auto py-6">
+
+          <div className="flex gap-4 rounded-md border border-border bg-card p-4">
+
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-muted">
+
+              <Image
+
+                src="/product-1.png"
+
+                alt="Sneaker Branco Atlas"
+
+                fill
+
+                className="object-cover"
+
+                sizes="80px"
+
+              />
+
+            </div>
+
+            <div className="flex flex-1 flex-col justify-center gap-1">
+
+              <p className="text-sm font-medium text-foreground">Sneaker Branco Atlas</p>
+
+              <p className="text-xs text-muted-foreground">1x · Tamanho 39</p>
+
+              <p className="text-sm font-semibold text-foreground">R$ 299,90</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div className="mt-auto border-t border-border pt-6">
+
+          <div className="mb-4 flex items-center justify-between text-sm">
+
+            <span className="text-muted-foreground">Subtotal</span>
+
+            <span className="font-semibold text-foreground">R$ 299,90</span>
+
+          </div>
+
+          <Link
+
+            href="/checkout"
+
+            className="block w-full rounded-md bg-primary py-4 text-center text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+
+          >
+
+            Finalizar Compra
+
+          </Link>
+
+        </div>
+
+      </SheetContent>
+
+    </Sheet>
+
+  )
+
+}
+
+
+
+
+
