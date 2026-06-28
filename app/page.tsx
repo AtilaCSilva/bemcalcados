@@ -35,7 +35,7 @@ function mapDbProductToProduct(row: DbProduct): Product {
 
 export default async function HomePage() {
   const { data } = await supabase.from("products").select("*")
-  const products: Product[] = (data ?? []).map((row) => mapDbProductToProduct(row as DbProduct))
+  const products: Product[] = (data ?? []).map((row: DbProduct) => mapDbProductToProduct(row))
 
   return (
     <div className="min-h-screen bg-background">
