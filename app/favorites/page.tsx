@@ -11,8 +11,8 @@ const allProducts = [
     id: "sneaker-atlas-1",
     name: "Sneaker Branco Atlas",
     price: "R$ 389,00",
-    image: "/product-1.png",
-    hoverImage: "/product-1-worn.png",
+    image: "/products/sneakers/product-1.png",
+    hoverImage: "/products/sneakers/product-1-worn.png",
     sizes: [37, 38, 39, 40, 41, 42],
   },
 ]

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { resolveImageSrc } from "@/lib/product-types"
 
 export type Product = {
   id: string
@@ -13,17 +14,11 @@ export type Product = {
   sizes: number[]
 }
 
-function resolveImageSrc(path?: string | null) {
-  if (!path) return "/placeholder.svg"
-  if (path.startsWith("http://") || path.startsWith("https://")) return path
-  return path.startsWith("/") ? path : `/${path}`
-}
-
 export function ProductCard({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState<number | null>(null)
 
   // Variável para evitar repetição de código
-  const productUrl = selectedSize ? `/produto?size=${selectedSize}` : "/produto"
+  const productUrl = selectedSize ? `/produto/${product.id}?size=${selectedSize}` : `/produto/${product.id}`
   const imageSrc = resolveImageSrc(product.image)
   const hoverImageSrc = resolveImageSrc(product.hoverImage)
 

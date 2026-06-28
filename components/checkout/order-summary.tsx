@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { resolveImageSrc } from "@/lib/product-types"
 import { useCart } from "@/hooks/use-cart"
 import { shippingOptions, type ShippingOption } from "@/components/checkout/shipping-block"
 
@@ -34,9 +35,8 @@ export function OrderSummary({ selectedShippingId }: OrderSummaryProps) {
           items.map((item) => (
             <div key={`${item.id}-${item.size}`} className="flex gap-4 border-b border-border pb-4 last:border-0 last:pb-0">
               <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md bg-muted">
-                {/* Imagem estática por enquanto, até adicionarmos o caminho da imagem no Zustand */}
                 <Image
-                  src="/product-1.png"
+                  src={resolveImageSrc(item.image)}
                   alt={item.name}
                   fill
                   className="object-cover"

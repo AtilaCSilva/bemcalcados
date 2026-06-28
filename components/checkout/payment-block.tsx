@@ -13,6 +13,7 @@ export function PaymentBlock() {
 
   return (
     <section className="flex flex-col gap-6" aria-labelledby="payment-heading">
+      <input type="hidden" name="paymentMethod" value={method} />
       <SectionHeading step={3} title="Pagamento" />
 
       <div className="flex gap-2" role="tablist" aria-label="Forma de pagamento">
