@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { SectionHeading } from "@/components/checkout/section-heading"
+import { chipInteractive, motionBase } from "@/lib/interaction"
 
 export type ShippingOption = {
   id: string
@@ -39,10 +40,11 @@ export function ShippingBlock({ selectedId, onSelect }: ShippingBlockProps) {
             <label
               key={option.id}
               className={cn(
-                "flex cursor-pointer items-center gap-4 rounded-md border px-5 py-4 transition-colors",
+                "flex cursor-pointer items-center gap-4 rounded-md border px-5 py-4",
+                motionBase,
                 isSelected
                   ? "border-foreground bg-card ring-1 ring-foreground"
-                  : "border-border bg-card hover:border-foreground/50",
+                  : cn("border-border bg-card", chipInteractive),
               )}
             >
               <input

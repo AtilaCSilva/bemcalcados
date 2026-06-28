@@ -9,6 +9,7 @@ import { useFavorites } from "../../hooks/use-favorites"
 import { useToast } from "@/hooks/use-toast"
 import type { ProductDetail } from "@/lib/product-types"
 import { formatProductPrice } from "@/lib/product-types"
+import { btnIconSquare, btnPrimary, chipInteractive, colorSwatchBtn } from "@/lib/interaction"
 
 const SOLID_SWATCHES: Record<string, string> = {
   preto: "#000000",
@@ -137,7 +138,8 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
                 aria-label={color.label}
                 aria-pressed={isSelected}
                 className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full transition-all",
+                  "flex h-10 w-10 items-center justify-center rounded-full",
+                  colorSwatchBtn,
                   isSelected && "ring-2 ring-foreground ring-offset-2 ring-offset-background",
                 )}
               >
@@ -171,10 +173,10 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
               onClick={() => setSelectedSize(size)}
               aria-pressed={selectedSize === size}
               className={cn(
-                "flex h-12 items-center justify-center rounded-md border text-sm font-medium transition-colors",
+                "flex h-12 items-center justify-center rounded-md border text-sm font-medium",
                 selectedSize === size
                   ? "border-foreground bg-foreground text-background"
-                  : "border-border text-foreground hover:border-foreground",
+                  : cn("border-border text-foreground", chipInteractive),
               )}
             >
               {size}
@@ -197,7 +199,7 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
       <div className="flex items-stretch gap-3">
         <button
           onClick={handleAddToCart}
-          className="flex flex-1 items-center justify-center rounded-md bg-primary py-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+          className={cn(btnPrimary, "flex flex-1 items-center justify-center rounded-md py-4 text-sm font-semibold uppercase tracking-[0.2em]")}
         >
           Adicionar ao Carrinho
         </button>
@@ -205,7 +207,7 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
           onClick={handleFavorite}
           aria-label="Adicionar aos favoritos"
           aria-pressed={isFavorited}
-          className="flex h-auto w-14 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:border-foreground"
+          className={cn(btnIconSquare, "h-auto w-14 rounded-md")}
         >
           <Heart className={cn("h-5 w-5", isFavorited && "fill-primary text-primary")} strokeWidth={1.5} />
         </button>

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { CreditCard, QrCode } from "lucide-react"
 import { SectionHeading } from "@/components/checkout/section-heading"
 import { CheckoutField } from "@/components/checkout/checkout-field"
+import { chipInteractive, motionBase } from "@/lib/interaction"
 
 type PaymentMethod = "pix" | "card"
 
@@ -23,10 +24,11 @@ export function PaymentBlock() {
           aria-selected={method === "pix"}
           onClick={() => setMethod("pix")}
           className={cn(
-            "flex flex-1 items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium transition-colors",
+            "flex flex-1 items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium",
+            motionBase,
             method === "pix"
               ? "border-foreground bg-foreground text-background"
-              : "border-border bg-card text-foreground hover:border-foreground",
+              : cn("border-border bg-card text-foreground", chipInteractive),
           )}
         >
           <QrCode className="h-4 w-4" strokeWidth={1.5} />
@@ -38,10 +40,11 @@ export function PaymentBlock() {
           aria-selected={method === "card"}
           onClick={() => setMethod("card")}
           className={cn(
-            "flex flex-1 items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium transition-colors",
+            "flex flex-1 items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium",
+            motionBase,
             method === "card"
               ? "border-foreground bg-foreground text-background"
-              : "border-border bg-card text-foreground hover:border-foreground",
+              : cn("border-border bg-card text-foreground", chipInteractive),
           )}
         >
           <CreditCard className="h-4 w-4" strokeWidth={1.5} />

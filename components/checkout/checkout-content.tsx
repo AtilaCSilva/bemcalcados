@@ -7,6 +7,8 @@ import { ShippingBlock, shippingOptions } from "@/components/checkout/shipping-b
 import { PaymentBlock } from "@/components/checkout/payment-block"
 import { OrderSummary } from "@/components/checkout/order-summary"
 import { useCart } from "@/hooks/use-cart"
+import { btnPrimary } from "@/lib/interaction"
+import { cn } from "@/lib/utils"
 
 function formatPrice(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
@@ -94,7 +96,7 @@ export function CheckoutContent() {
 
         <button
           type="submit"
-          className="w-full rounded-md bg-primary py-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+          className={cn(btnPrimary, "w-full rounded-md py-4 text-sm font-semibold uppercase tracking-[0.2em]")}
         >
           Finalizar Compra
         </button>

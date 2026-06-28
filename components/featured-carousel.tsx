@@ -3,6 +3,8 @@
 import { useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { ProductCard, type Product } from "@/components/product-card"
+import { btnIconSquare } from "@/lib/interaction"
+import { cn } from "@/lib/utils"
 
 type FeaturedCarouselProps = {
   products: Product[]
@@ -28,14 +30,14 @@ export function FeaturedCarousel({ products }: FeaturedCarouselProps) {
           <button
             onClick={() => scroll("left")}
             aria-label="Anterior"
-            className="flex h-11 w-11 items-center justify-center border border-border text-foreground transition-colors hover:border-foreground"
+            className={cn(btnIconSquare, "h-11 w-11 rounded-md")}
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={() => scroll("right")}
             aria-label="Próximo"
-            className="flex h-11 w-11 items-center justify-center border border-border text-foreground transition-colors hover:border-foreground"
+            className={cn(btnIconSquare, "h-11 w-11 rounded-md")}
           >
             <ChevronRight className="h-5 w-5" />
           </button>

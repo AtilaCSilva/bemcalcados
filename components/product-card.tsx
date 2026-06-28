@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { resolveImageSrc } from "@/lib/product-types"
+import { btnDark, btnOutline, cardImage, chipInteractive } from "@/lib/interaction"
 
 export type Product = {
   id: string
@@ -24,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="group flex h-full w-[280px] shrink-0 snap-start flex-col gap-4 sm:w-[320px]">
-      <Link href={productUrl} className="relative block aspect-square w-full overflow-hidden rounded-xl bg-muted">
+      <Link href={productUrl} className={cn("relative block aspect-square w-full overflow-hidden rounded-xl border border-border bg-muted shadow-sm", cardImage)}>
         <img
           src={imageSrc}
           alt={product.name}
@@ -39,7 +40,7 @@ export function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <div className="flex flex-1 flex-col gap-3">
-        <Link href={productUrl} className="flex items-baseline justify-between gap-3 transition-opacity hover:opacity-80">
+        <Link href={productUrl} className="flex items-baseline justify-between gap-3 transition-opacity duration-200 hover:opacity-80">
           <h3 className="font-serif text-lg font-semibold text-foreground">{product.name}</h3>
           <span className="text-base font-medium text-foreground">{product.price}</span>
         </Link>
@@ -56,10 +57,10 @@ export function ProductCard({ product }: { product: Product }) {
               onClick={() => setSelectedSize(size)}
               aria-pressed={selectedSize === size}
               className={cn(
-                "flex h-9 w-9 items-center justify-center border text-sm transition-colors",
+                "flex h-9 w-9 items-center justify-center border text-sm",
                 selectedSize === size
                   ? "border-foreground bg-foreground text-background"
-                  : "border-border text-foreground hover:border-foreground",
+                  : cn("border-border text-foreground", chipInteractive),
               )}
             >
               {size}
@@ -72,13 +73,12 @@ export function ProductCard({ product }: { product: Product }) {
           {/* Botão principal de destaque */}
           <Link
             href={productUrl}
-            className="block w-full bg-foreground py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-primary hover:text-primary-foreground"
+            className={cn(btnDark, "block w-full py-3.5 text-center text-xs font-semibold uppercase tracking-[0.2em]")}
           >
             Comprar
           </Link>
 
-          {/* Botão secundário Provador Virtual */}
-          <button className="w-full border border-foreground bg-transparent py-3 text-xs font-medium uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-primary hover:border-primary hover:text-primary-foreground">
+          <button className={cn(btnOutline, "w-full py-3 text-xs font-medium uppercase tracking-[0.18em]")}>
             Provador Virtual
           </button>
         </div>

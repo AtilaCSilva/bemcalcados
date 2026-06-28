@@ -6,6 +6,8 @@ import { ProductCard, type Product } from "@/components/product-card"
 import { supabase } from "@/lib/supabase"
 import { HeartCrack, Trash2 } from "lucide-react"
 import Link from "next/link"
+import { btnDark, motionBase } from "@/lib/interaction"
+import { cn } from "@/lib/utils"
 
 type DbProduct = {
   id: string
@@ -78,7 +80,7 @@ export default function FavoritesPage() {
           </p>
           <Link
             href="/"
-            className="rounded-md bg-foreground px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-background transition-colors hover:bg-primary"
+            className={cn(btnDark, "rounded-md px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em]")}
           >
             Explorar Produtos
           </Link>
@@ -89,7 +91,11 @@ export default function FavoritesPage() {
             <div key={product.id} className="relative group/fav">
               <button
                 onClick={() => toggleFavorite(product.id)}
-                className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:bg-destructive hover:text-destructive-foreground"
+                className={cn(
+                  "absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-muted-foreground shadow-sm backdrop-blur-sm",
+                  motionBase,
+                  "hover:scale-105 hover:bg-destructive hover:text-destructive-foreground",
+                )}
                 aria-label="Remover dos favoritos"
               >
                 <Trash2 className="h-4 w-4" />

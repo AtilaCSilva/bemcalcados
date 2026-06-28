@@ -1,5 +1,7 @@
 import { Footprints } from "lucide-react"
 import Link from "next/link"
+import { linkSoft } from "@/lib/interaction"
+import { cn } from "@/lib/utils"
 
 const links = [
   { label: "Sobre Nós", href: "#" },
@@ -14,7 +16,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="flex flex-col items-center gap-8 text-center">
-          <Link href="/" className="flex items-center gap-2.5" aria-label="Bem Calçados">
+          <Link href="/" className="group flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80" aria-label="Bem Calçados">
             <Footprints className="h-5 w-5 text-foreground" strokeWidth={1.5} />
             <span className="font-serif text-lg font-bold uppercase tracking-wide text-foreground">Bem Calçados</span>
           </Link>
@@ -25,7 +27,7 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className={cn("text-sm text-muted-foreground", linkSoft, "hover:text-foreground")}
                   >
                     {link.label}
                   </Link>

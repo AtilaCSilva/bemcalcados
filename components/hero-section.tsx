@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { btnPrimary } from "@/lib/interaction"
+import { cn } from "@/lib/utils"
 
 const banners = [
   {
@@ -37,7 +39,7 @@ export function HeroSection() {
             </h2>
             <Link
               href={banner.href}
-              className="inline-block bg-primary px-9 py-4 text-sm font-medium uppercase tracking-[0.18em] text-primary-foreground transition-colors hover:bg-foreground hover:text-background"
+              className={cn(btnPrimary, "inline-block px-9 py-4 text-sm font-medium uppercase tracking-[0.18em]")}
             >
               {banner.cta}
             </Link>

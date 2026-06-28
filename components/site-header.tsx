@@ -4,6 +4,8 @@ import { Footprints, Heart } from "lucide-react"
 import Link from "next/link"
 import { CartDrawer } from "@/components/cart-drawer"
 import { useFavorites } from "@/hooks/use-favorites"
+import { btnIcon, linkNav } from "@/lib/interaction"
+import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
   const { favoriteIds } = useFavorites()
@@ -11,7 +13,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Bem Calçados - página inicial">
+        <Link href="/" className="group flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80" aria-label="Bem Calçados - página inicial">
           <Footprints className="h-6 w-6 text-foreground" strokeWidth={1.5} />
           <span className="font-serif text-xl font-bold uppercase tracking-wide text-foreground">Bem Calçados</span>
         </Link>
@@ -19,13 +21,13 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-12 md:flex" aria-label="Navegação principal">
           <Link
             href="/#sneakers"
-            className="text-sm font-medium uppercase tracking-[0.2em] text-foreground transition-colors hover:text-primary"
+            className={cn("text-sm font-medium uppercase tracking-[0.2em] text-foreground", linkNav)}
           >
             Sneakers
           </Link>
           <Link
             href="/#casuais"
-            className="text-sm font-medium uppercase tracking-[0.2em] text-foreground transition-colors hover:text-primary"
+            className={cn("text-sm font-medium uppercase tracking-[0.2em] text-foreground", linkNav)}
           >
             Casuais
           </Link>
@@ -33,10 +35,10 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-4">
           {/* Link para a página de favoritos com o contador */}
-          <Link href="/favorites" className="relative p-2 text-foreground transition-colors hover:text-primary">
+          <Link href="/favorites" className={cn("relative", btnIcon)} aria-label="Favoritos">
             <Heart className="h-5 w-5" strokeWidth={1.5} />
             {favoriteIds.length > 0 && (
-              <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[10px] text-white">
+              <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] text-background">
                 {favoriteIds.length}
               </span>
             )}

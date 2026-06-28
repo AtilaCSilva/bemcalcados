@@ -37,7 +37,7 @@ export function CheckoutField({
         placeholder={placeholder}
         onChange={onChange}
         required={required}
-        className="h-12 rounded-md border border-input bg-card px-4 text-sm text-foreground transition-colors placeholder:text-muted-foreground/60 focus:border-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+        className="h-12 rounded-md border border-input bg-card px-4 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground/60 hover:border-foreground/40 focus:border-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
       />
     </div>
   )

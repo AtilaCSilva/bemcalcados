@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { cn } from "@/lib/utils"
 import type { ProductColorVariant } from "@/lib/product-types"
 import { resolveImageSrc } from "@/lib/product-types"
+import { cardImage } from "@/lib/interaction"
 
 type ProductGalleryProps = {
   productName: string
@@ -57,7 +58,7 @@ export function ProductGallery({ productName, selectedColorId, colors, defaultIm
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-muted">
+      <div className={cn("relative aspect-square w-full overflow-hidden rounded-xl border border-border bg-muted shadow-sm", cardImage)}>
         <img
           src={images[activeIndex]?.src ?? images[0].src}
           alt={images[activeIndex]?.alt ?? images[0].alt}
@@ -75,7 +76,7 @@ export function ProductGallery({ productName, selectedColorId, colors, defaultIm
               aria-label={image.alt}
               aria-pressed={activeIndex === index}
               className={cn(
-                "relative aspect-square overflow-hidden rounded-md bg-muted transition-all",
+                "relative aspect-square overflow-hidden rounded-md border border-border bg-muted transition-all duration-200",
                 activeIndex === index
                   ? "ring-2 ring-foreground ring-offset-2 ring-offset-background"
                   : "opacity-70 hover:opacity-100",

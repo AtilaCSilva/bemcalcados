@@ -16,7 +16,7 @@ export function InspirationGallery() {
         </h2>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
           {images.map((image) => (
-            <div key={image.src} className="group aspect-square overflow-hidden">
+            <div key={image.src} className="group aspect-square overflow-hidden rounded-md border border-border">
               <img
                 src={image.src || "/placeholder.svg"}
                 alt={image.alt}
