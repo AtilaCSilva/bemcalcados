@@ -1,7 +1,8 @@
 import { Toaster } from "@/components/ui/toaster"
 import type { Metadata } from "next"
-import { Playfair_Display, Inter } from "next/font/google"
+import { Playfair_Display, Inter, Geist } from "next/font/google"
 import "./globals.css"
+import { cn } from "@/lib/utils";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -9,11 +10,7 @@ const playfair = Playfair_Display({
   display: "swap",
 })
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-})
+const geist = Geist({subsets:['latin'],variable:'--font-sans'})
 
 export const metadata: Metadata = {
   title: "Bem Calçados — Conforto e Estilo para o Seu Passo",
@@ -28,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={cn("font-sans", geist.variable)}>
       <body suppressHydrationWarning={true}>
         {children}
         <Toaster /> {/* Adicione esta linha */}
