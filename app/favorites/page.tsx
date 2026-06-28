@@ -1,29 +1,60 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { useFavorites } from "@/hooks/use-favorites"
-import { ProductCard } from "@/components/product-card"
+import { ProductCard, type Product } from "@/components/product-card"
+import { supabase } from "@/lib/supabase"
 import { HeartCrack, Trash2 } from "lucide-react"
 import Link from "next/link"
 
-// Mock de produtos (substituiremos pelo banco de dados depois)
-const allProducts = [
-  {
-    id: "sneaker-atlas-1",
-    name: "Sneaker Branco Atlas",
-    price: "R$ 389,00",
-    image: "/products/sneakers/product-1.png",
-    hoverImage: "/products/sneakers/product-1-worn.png",
-    sizes: [37, 38, 39, 40, 41, 42],
-  },
-]
+type DbProduct = {
+  id: string
+  name: string
+  price: number
+  image_url: string
+  hover_image_url: string
+  sizes: number[]
+}
+
+function mapDbProductToProduct(row: DbProduct): Product {
+  return {
+    id: String(row.id),
+    name: row.name,
+    price: row.price.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }),
+    image: row.image_url,
+    hoverImage: row.hover_image_url,
+    sizes: row.sizes.map(Number),
+  }
+}
 
 export default function FavoritesPage() {
-  // Puxando também a função toggleFavorite do Zustand
   const { favoriteIds, toggleFavorite } = useFavorites()
+  const [products, setProducts] = useState<Product[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-  const favoriteProducts = allProducts.filter((product) =>
-    favoriteIds.includes(product.id)
-  )
+  useEffect(() => {
+    async function fetchFavorites() {
+      if (favoriteIds.length === 0) {
+        setProducts([])
+        setIsLoading(false)
+        return
+      }
+
+      setIsLoading(true)
+
+      const { data } = await supabase.from("products").select("*").in("id", favoriteIds)
+
+      setProducts((data ?? []).map((row) => mapDbProductToProduct(row as DbProduct)))
+      setIsLoading(false)
+    }
+
+    fetchFavorites()
+  }, [favoriteIds])
 
   return (
     <div className="min-h-screen bg-background py-16 px-6 lg:px-10 max-w-7xl mx-auto">
@@ -36,7 +67,9 @@ export default function FavoritesPage() {
         </p>
       </div>
 
-      {favoriteProducts.length === 0 ? (
+      {isLoading ? (
+        <p className="text-center text-muted-foreground py-20">Carregando favoritos...</p>
+      ) : products.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <HeartCrack className="h-16 w-16 text-muted-foreground/30 mb-4" strokeWidth={1} />
           <h2 className="font-serif text-xl font-medium mb-2">Sua lista está vazia</h2>
@@ -52,9 +85,8 @@ export default function FavoritesPage() {
         </div>
       ) : (
         <div className="flex flex-wrap gap-6">
-          {favoriteProducts.map((product) => (
+          {products.map((product) => (
             <div key={product.id} className="relative group/fav">
-              {/* Botão de remover absoluto sobre a imagem */}
               <button
                 onClick={() => toggleFavorite(product.id)}
                 className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-background/80 text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:bg-destructive hover:text-destructive-foreground"
@@ -62,7 +94,7 @@ export default function FavoritesPage() {
               >
                 <Trash2 className="h-4 w-4" />
               </button>
-              
+
               <ProductCard product={product} />
             </div>
           ))}
