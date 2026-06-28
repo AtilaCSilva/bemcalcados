@@ -5,6 +5,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { resolveImageSrc } from "@/lib/product-types"
 import { btnDark, btnOutline, cardImage, chipInteractive } from "@/lib/interaction"
+import { VirtualFitting } from "@/components/pdp/virtual-fitting"
 
 export type Product = {
   id: string
@@ -78,9 +79,11 @@ export function ProductCard({ product }: { product: Product }) {
             Comprar
           </Link>
 
-          <button className={cn(btnOutline, "w-full py-3 text-xs font-medium uppercase tracking-[0.18em]")}>
-            Provador Virtual
-          </button>
+          <VirtualFitting availableSizes={product.sizes} onSizeSuggested={setSelectedSize}>
+            <button type="button" className={cn(btnOutline, "w-full py-3 text-xs font-medium uppercase tracking-[0.18em]")}>
+              Provador Virtual
+            </button>
+          </VirtualFitting>
         </div>
       </div>
     </div>

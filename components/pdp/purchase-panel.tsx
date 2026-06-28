@@ -9,7 +9,8 @@ import { useFavorites } from "../../hooks/use-favorites"
 import { useToast } from "@/hooks/use-toast"
 import type { ProductDetail } from "@/lib/product-types"
 import { formatProductPrice } from "@/lib/product-types"
-import { btnIconSquare, btnPrimary, chipInteractive, colorSwatchBtn } from "@/lib/interaction"
+import { btnIconSquare, btnOutline, btnPrimary, chipInteractive, colorSwatchBtn } from "@/lib/interaction"
+import { VirtualFitting } from "@/components/pdp/virtual-fitting"
 
 const SOLID_SWATCHES: Record<string, string> = {
   preto: "#000000",
@@ -161,10 +162,15 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-foreground">Tamanho</span>
-          <button className="inline-flex items-center gap-1 text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline">
-            Tabela de Medidas
-            <ChevronRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-          </button>
+          <VirtualFitting availableSizes={product.sizes} onSizeSuggested={setSelectedSize}>
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+            >
+              Provador Virtual
+              <ChevronRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </button>
+          </VirtualFitting>
         </div>
         <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-8" role="group" aria-label="Seleção de tamanho">
           {product.sizes.map((size) => (
@@ -212,6 +218,12 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
           <Heart className={cn("h-5 w-5", isFavorited && "fill-primary text-primary")} strokeWidth={1.5} />
         </button>
       </div>
+
+      <VirtualFitting availableSizes={product.sizes} onSizeSuggested={setSelectedSize}>
+        <button type="button" className={cn(btnOutline, "w-full py-3.5 text-xs font-medium uppercase tracking-[0.18em]")}>
+          Provador Virtual
+        </button>
+      </VirtualFitting>
     </div>
   )
 }
