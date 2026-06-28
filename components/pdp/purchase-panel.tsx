@@ -74,7 +74,11 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
 
   const handleAddToCart = () => {
     if (!selectedSize) {
-      alert("Por favor, selecione um tamanho antes de comprar.")
+      toast({
+        title: "Por favor, selecione um tamanho antes de comprar.",
+        duration: 2000,
+        variant: "destructive",
+      })
       return
     }
 
@@ -91,9 +95,11 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
       image,
     })
 
+  
     toast({
       title: "Adicionado ao carrinho!",
       description: `${productName} (Tamanho ${selectedSize}).`,
+      duration: 2000,
     })
   }
 
@@ -103,6 +109,7 @@ export function PurchasePanel({ product, selectedColorId, onColorChange }: Purch
     toast({
       title: isFavorited ? "Removido dos favoritos" : "Salvo nos favoritos",
       description: "Você pode ver sua lista no topo da tela.",
+      duration: 2000,
     })
   }
 

@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   return {
     title: `${product.name} — Bem Calçados`,
-    description: `${product.name} com conforto premium e primeira troca grátis.`,
+    description: product.description ?? `${product.name} com conforto premium e primeira troca grátis.`,
   }
 }
 
@@ -49,7 +49,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <section className="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
           <ProductPageContent product={product} />
         </section>
-        <ProductDetails />
+        <ProductDetails product={product} />
       </main>
       <SiteFooter />
       <WhatsAppButton />

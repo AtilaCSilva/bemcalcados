@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import { cn } from "@/lib/utils"
-import { CreditCard, QrCode } from "lucide-react"
+import { QrCode } from "lucide-react"
+// import { CreditCard } from "lucide-react"
 import { SectionHeading } from "@/components/checkout/section-heading"
-import { CheckoutField } from "@/components/checkout/checkout-field"
-import { chipInteractive, motionBase } from "@/lib/interaction"
+// import { CheckoutField } from "@/components/checkout/checkout-field"
+import { motionBase } from "@/lib/interaction"
 
 type PaymentMethod = "pix" | "card"
 
@@ -17,23 +18,21 @@ export function PaymentBlock() {
       <input type="hidden" name="paymentMethod" value={method} />
       <SectionHeading step={3} title="Pagamento" />
 
-      <div className="flex gap-2" role="tablist" aria-label="Forma de pagamento">
+      <div role="tablist" aria-label="Forma de pagamento">
         <button
           type="button"
           role="tab"
-          aria-selected={method === "pix"}
+          aria-selected={true}
           onClick={() => setMethod("pix")}
           className={cn(
-            "flex flex-1 items-center justify-center gap-2 rounded-md border px-4 py-3 text-sm font-medium",
+            "flex w-full items-center justify-center gap-2 rounded-md border border-foreground bg-foreground px-4 py-3 text-sm font-medium text-background",
             motionBase,
-            method === "pix"
-              ? "border-foreground bg-foreground text-background"
-              : cn("border-border bg-card text-foreground", chipInteractive),
           )}
         >
           <QrCode className="h-4 w-4" strokeWidth={1.5} />
           Pix
         </button>
+        {/* Cartão de Crédito — reativar com integração Stripe
         <button
           type="button"
           role="tab"
@@ -50,6 +49,7 @@ export function PaymentBlock() {
           <CreditCard className="h-4 w-4" strokeWidth={1.5} />
           Cartão de Crédito
         </button>
+        */}
       </div>
 
       {method === "pix" ? (
@@ -61,21 +61,25 @@ export function PaymentBlock() {
           <p className="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-primary">Aprovação em segundos</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
-          <CheckoutField
-            label="Número do Cartão"
-            id="card-number"
-            inputMode="numeric"
-            autoComplete="cc-number"
-            placeholder="0000 0000 0000 0000"
-          />
-          <CheckoutField label="Nome no Cartão" id="card-name" autoComplete="cc-name" placeholder="Como impresso no cartão" />
-          <div className="grid grid-cols-2 gap-4">
-            <CheckoutField label="Validade" id="card-expiry" autoComplete="cc-exp" placeholder="MM/AA" />
-            <CheckoutField label="CVV" id="card-cvv" inputMode="numeric" autoComplete="cc-csc" placeholder="000" />
+        <>
+          {/* Formulário de cartão — Stripe (futuro)
+          <div className="flex flex-col gap-4">
+            <CheckoutField
+              label="Número do Cartão"
+              id="card-number"
+              inputMode="numeric"
+              autoComplete="cc-number"
+              placeholder="0000 0000 0000 0000"
+            />
+            <CheckoutField label="Nome no Cartão" id="card-name" autoComplete="cc-name" placeholder="Como impresso no cartão" />
+            <div className="grid grid-cols-2 gap-4">
+              <CheckoutField label="Validade" id="card-expiry" autoComplete="cc-exp" placeholder="MM/AA" />
+              <CheckoutField label="CVV" id="card-cvv" inputMode="numeric" autoComplete="cc-csc" placeholder="000" />
+            </div>
+            <p className="text-xs text-muted-foreground">Parcelamento disponível em até 6x sem juros.</p>
           </div>
-          <p className="text-xs text-muted-foreground">Parcelamento disponível em até 6x sem juros.</p>
-        </div>
+          */}
+        </>
       )}
     </section>
   )

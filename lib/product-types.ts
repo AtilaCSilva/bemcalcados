@@ -26,6 +26,9 @@ export type ProductDetail = {
   price: number
   sizes: number[]
   colors: ProductColorVariant[]
+  description?: string
+  materials?: string[]
+  care_instructions?: string[]
   benefits?: ProductBenefit[]
   image_url?: string
   hover_image_url?: string
@@ -38,6 +41,9 @@ export type DbProductRow = {
   sizes: number[]
   colors: ProductColorVariant[] | string
   category?: string
+  description?: string
+  materials?: string[] | string
+  care_instructions?: string[] | string
   benefits?: ProductBenefit[] | string
   image_url?: string
   hover_image_url?: string
@@ -193,6 +199,9 @@ export function mapDbRowToProductDetail(row: DbProductRow): ProductDetail {
     price: Number(row.price),
     sizes: (row.sizes ?? []).map(Number),
     colors,
+    description: row.description,
+    materials: parseJsonField<string[]>(row.materials, []),
+    care_instructions: parseJsonField<string[]>(row.care_instructions, []),
     benefits: parseJsonField<ProductBenefit[] | undefined>(row.benefits, undefined),
     image_url: row.image_url,
     hover_image_url: row.hover_image_url,
