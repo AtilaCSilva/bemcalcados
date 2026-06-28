@@ -15,14 +15,14 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
-        <div className="flex flex-col items-center gap-8 text-center">
+        <div className="flex flex-col items-center gap-y-10 text-center md:gap-8">
           <Link href="/" className="group flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80" aria-label="Bem Calçados">
             <Footprints className="h-5 w-5 text-foreground" strokeWidth={1.5} />
             <span className="font-serif text-lg font-bold uppercase tracking-wide text-foreground">Bem Calçados</span>
           </Link>
 
           <nav aria-label="Links institucionais">
-            <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <ul className="flex flex-col items-center gap-y-4 md:flex-row md:flex-wrap md:justify-center md:gap-x-8 md:gap-y-3">
               {links.map((link) => (
                 <li key={link.label}>
                   <Link
